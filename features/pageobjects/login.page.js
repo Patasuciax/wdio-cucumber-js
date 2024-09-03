@@ -15,6 +15,10 @@ class LoginPage extends Page {
         return $('#login-button');
     }
 
+    get msgInvalidCrendentials () {
+        return $("h3[data-test='error']")
+    }
+
     async login (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
