@@ -5,10 +5,14 @@ class InventoryPage extends Page {
         return $$('//div[@data-test="inventory-item-description"]');
     }
 
-    get cart () {
+    get cartBadge () {
         return $('//span[@data-test="shopping-cart-badge"]');
     }
 
+    get cart () {
+        return $('.shopping_cart_link');
+    }
+    
     // Identificators used for children objects in the DOM
     
     get identificatorProductName () {
@@ -61,6 +65,22 @@ class InventoryPage extends Page {
             await arrProducts[i].$(this.identificatorBtn).click()
             
         }
+    }
+
+    async checkout () {
+        let arrProducts = await this.frmProducts;
+        if (quantity > await arrProducts.length) {
+            throw new Error("Quantity value for test case is grather than products in the page");
+        }
+
+        for (let i = 0; i < quantity; i++) {
+            await arrProducts[i].$(this.identificatorBtn).click()
+            
+        }
+    }
+
+    async clickCart () {
+        await this.cart.click();
     }
 }
 
