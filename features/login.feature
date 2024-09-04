@@ -1,5 +1,6 @@
 Feature: Login for saucedemo.com
 
+  @regression
   Scenario Outline: Successful login with valid credentials
 
     Given I am on the login page
@@ -9,6 +10,7 @@ Feature: Login for saucedemo.com
     Examples:
       | username      | password    |
       | standard_user | secret_sauce|
+
 
   Scenario Outline: Unsuccessful login with invalid credentials
 

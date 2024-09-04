@@ -9,4 +9,5 @@ export default class Page {
     url () {
         return browser.getUrl()
     }
+
 }

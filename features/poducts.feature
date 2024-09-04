@@ -24,3 +24,15 @@ Feature: Related to the inventory and product details
     Examples:
     | username      | password    | quantity  |
     | standard_user | secret_sauce| 6         |
+
+  @regression
+  Scenario Outline: Checkout process
+    Given I am on the login page
+    When I login with <username> and <password>
+    And I add <quantity> to the shopping cart
+    And I proceed to checkout as <first_name> <last_name> and postal code <postal_code>
+    Then A confirmation message is displayed
+
+    Examples:
+    | username      | password    | quantity  | first_name  | last_name | postal_code |
+    | standard_user | secret_sauce| 6         | Marcelo     | Salas     | 5000        |
