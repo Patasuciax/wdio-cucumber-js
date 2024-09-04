@@ -5,6 +5,10 @@ class InventoryPage extends Page {
         return $$('//div[@data-test="inventory-item-description"]');
     }
 
+    get cart () {
+        return $('//span[@data-test="shopping-cart-badge"]');
+    }
+
     // Identificators used for children objects in the DOM
     
     get identificatorProductName () {
@@ -17,6 +21,10 @@ class InventoryPage extends Page {
 
     get identificatorProductPrice () {
         return ('//div[@data-test="inventory-item-price"]')
+    }
+
+    get identificatorBtn () {
+        return ('button')
     }
 
     async getProductDescriptionByName (prName) {
@@ -41,6 +49,18 @@ class InventoryPage extends Page {
             }          
         }
         throw new Error(`Product not found: prName`);
+    }
+
+    async addToCart (quantity) {
+        let arrProducts = await this.frmProducts;
+        if (quantity > await arrProducts.length) {
+            throw new Error("Quantity value for test case is grather than products in the page");
+        }
+
+        for (let i = 0; i < quantity; i++) {
+            await arrProducts[i].$(this.identificatorBtn).click()
+            
+        }
     }
 }
 

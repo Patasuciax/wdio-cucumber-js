@@ -13,6 +13,10 @@ When(/^I login with (\w+) and (.+)$/, async (username, password) => {
     await LoginPage.login(username, password)
 });
 
+When(/^I add (\d+) to the shopping cart$/, async (quantity) => {
+    await InventoryPage.addToCart(quantity)
+});
+
 Then(/^I see the inventory page$/, async() => {
     await expect(LoginPage.verifyLogin()).toBeTruthy();
 })
@@ -25,4 +29,9 @@ Then(/^I see the error: (.+)$/, async(message) => {
 Then(/^The product (.*) displays (.*) with the description (.*)$/, async(prName, prPrice, prDescription) => {
     await expect(await (InventoryPage.getProductDescriptionByName(prName))).toEqual(prDescription)
     await expect(await (InventoryPage.getProductPriceByName(prName))).toEqual(prPrice)
+})
+
+Then(/^Shopping cart displays (\d+) products$/, async(quantity) => {
+    await expect(await (InventoryPage.cart.getText())).toEqual(String(quantity))
+    
 })
